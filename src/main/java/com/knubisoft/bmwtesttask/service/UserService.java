@@ -1,5 +1,9 @@
 package com.knubisoft.bmwtesttask.service;
 
+import com.knubisoft.bmwtesttask.converter.AddressConverter;
+import com.knubisoft.bmwtesttask.converter.CompanyConverter;
+import com.knubisoft.bmwtesttask.converter.GeoConverter;
+import com.knubisoft.bmwtesttask.converter.UserConverter;
 import com.knubisoft.bmwtesttask.db_model.UserModel;
 import com.knubisoft.bmwtesttask.dto.AddressDTO;
 import com.knubisoft.bmwtesttask.dto.CompanyDTO;
@@ -12,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -43,20 +48,12 @@ public class UserService {
                 });
     }
     private void insertUserToDatabase(final UserDTO userDTO, final AddressDTO addressDTO, final CompanyDTO companyDTO) {
-        UserModel user = convertUserDTOToUser(userDTO, addressDTO, companyDTO);
+        UserModel user = UserConverter.convertUserDTOToUser(userDTO, addressDTO, companyDTO);
         userRepository.save(user);
     }
 
-    private UserModel convertUserDTOToUser(UserDTO userDTO, AddressDTO addressDTO, CompanyDTO companyDTO) {
-        return UserModel.builder()
-                .email(userDTO.getEmail())
-                .name(userDTO.getName())
-                .phone(userDTO.getName())
-                .username(userDTO.getUserName())
-                .website(userDTO.getWebsite())
-                .address(addressService.convertAddressDTOToAddress(addressDTO, geoService.convertGeoDTOToGEO(addressDTO.getGeo())))
-                .company(companyService.convertCompanyDTOToCompany(companyDTO))
-                .build();
+    public List<UserModel> getAllUsers() {
+        return null;
     }
 
     private void validateResponse(final ResponseEntity<UserDTO[]> response) {

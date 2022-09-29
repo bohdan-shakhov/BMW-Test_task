@@ -1,5 +1,6 @@
 package com.knubisoft.bmwtesttask.service;
 
+import com.knubisoft.bmwtesttask.converter.CompanyConverter;
 import com.knubisoft.bmwtesttask.db_model.Address;
 import com.knubisoft.bmwtesttask.db_model.Company;
 import com.knubisoft.bmwtesttask.dto.CompanyDTO;
@@ -14,15 +15,8 @@ public class CompanyService {
     private final CompanyRepository companyRepository;
 
     protected void insertCompanyToDatabase(final CompanyDTO companyDTO) {
-        Company company = convertCompanyDTOToCompany(companyDTO);
+        Company company = CompanyConverter.convertCompanyDTOToCompany(companyDTO);
         companyRepository.save(company);
     }
 
-    protected Company convertCompanyDTOToCompany(final CompanyDTO companyDTO) {
-        return Company.builder()
-                .bs(companyDTO.getBs())
-                .catchPhrase(companyDTO.getCatchPhrase())
-                .name(companyDTO.getName())
-                .build();
-    }
 }

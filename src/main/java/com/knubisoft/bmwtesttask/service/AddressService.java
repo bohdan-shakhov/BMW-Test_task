@@ -1,5 +1,7 @@
 package com.knubisoft.bmwtesttask.service;
 
+import com.knubisoft.bmwtesttask.converter.AddressConverter;
+import com.knubisoft.bmwtesttask.converter.GeoConverter;
 import com.knubisoft.bmwtesttask.db_model.Address;
 import com.knubisoft.bmwtesttask.db_model.Geo;
 import com.knubisoft.bmwtesttask.dto.AddressDTO;
@@ -16,18 +18,9 @@ public class AddressService {
     private final GeoService geoService;
 
     public void insertAddressToDatabase(final AddressDTO addressDTO, final GeoDTO geoDTO) {
-        Geo geo = geoService.convertGeoDTOToGEO(geoDTO);
-        Address address = convertAddressDTOToAddress(addressDTO, geo);
+        Geo geo = GeoConverter.convertGeoDTOToGEO(geoDTO);
+        Address address = AddressConverter.convertAddressDTOToAddress(addressDTO, geo);
         addressRepository.save(address);
     }
 
-    public Address convertAddressDTOToAddress(final AddressDTO addressDTO, final Geo geo) {
-        return Address.builder()
-                .city(addressDTO.getCity())
-                .street(addressDTO.getStreet())
-                .suite(addressDTO.getSuite())
-                .zipcode(addressDTO.getZipCode())
-                .geo(geo)
-                .build();
-    }
 }
