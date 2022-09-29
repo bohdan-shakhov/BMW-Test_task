@@ -1,7 +1,7 @@
 package com.knubisoft.bmwtesttask.db_model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 
@@ -9,6 +9,8 @@ import javax.persistence.*;
 @Table(name = "address")
 @Getter
 @Setter
+@SuperBuilder
+@NoArgsConstructor
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

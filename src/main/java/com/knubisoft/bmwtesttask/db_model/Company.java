@@ -1,7 +1,9 @@
 package com.knubisoft.bmwtesttask.db_model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,6 +12,8 @@ import java.util.List;
 @Table(name = "company")
 @Getter
 @Setter
+@SuperBuilder
+@NoArgsConstructor
 public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
