@@ -21,14 +21,14 @@ public class UserModel {
 
     private String website;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private Address address;
 
     private String phone;
 
     private String name;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="company_id")
     private Company company;
 

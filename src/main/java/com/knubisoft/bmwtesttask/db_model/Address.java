@@ -18,7 +18,7 @@ public class Address {
 
     private String zipcode;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Geo geo;
 
     private String suite;

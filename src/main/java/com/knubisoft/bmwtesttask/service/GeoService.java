@@ -13,7 +13,7 @@ public class GeoService {
 
     private final GeoRepository geoRepository;
 
-    protected void insertGeoToDatabase(final GeoDTO geoDTO) {
+    public void insertGeoToDatabase(final GeoDTO geoDTO) {
         Geo geo = GeoConverter.convertGeoDTOToGEO(geoDTO);
         geoRepository.save(geo);
     }

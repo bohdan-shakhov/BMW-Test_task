@@ -14,7 +14,7 @@ public class CompanyService {
 
     private final CompanyRepository companyRepository;
 
-    protected void insertCompanyToDatabase(final CompanyDTO companyDTO) {
+    public void insertCompanyToDatabase(final CompanyDTO companyDTO) {
         Company company = CompanyConverter.convertCompanyDTOToCompany(companyDTO);
         companyRepository.save(company);
     }

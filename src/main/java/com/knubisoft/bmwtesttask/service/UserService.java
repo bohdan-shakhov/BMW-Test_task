@@ -41,9 +41,6 @@ public class UserService {
         UserDTO[] responseBody = response.getBody();
         Arrays.stream(Objects.requireNonNull(responseBody))
                 .forEach(user -> {
-                    geoService.insertGeoToDatabase(user.getAddress().getGeo());
-                    addressService.insertAddressToDatabase(user.getAddress(), user.getAddress().getGeo());
-                    companyService.insertCompanyToDatabase(user.getCompany());
                     insertUserToDatabase(user, user.getAddress(), user.getCompany());
                 });
     }
@@ -53,11 +50,11 @@ public class UserService {
     }
 
     public List<UserModel> getAllUsers() {
-        return null;
+        return userRepository.findAll();
     }
 
     private void validateResponse(final ResponseEntity<UserDTO[]> response) {
-        if (HttpStatus.OK.equals(response.getStatusCode())) {
+        if (!HttpStatus.OK.equals(response.getStatusCode())) {
             // TODO add custom exception
             throw new RuntimeException(String.format("unexpected status code -> %s", response.getStatusCode().value()));
         }
