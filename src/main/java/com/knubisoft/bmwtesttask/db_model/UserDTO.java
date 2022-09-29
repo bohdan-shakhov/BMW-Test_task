@@ -1,4 +1,4 @@
-package com.knubisoft.bmwtesttask.dto;
+package com.knubisoft.bmwtesttask.db_model;
 
 import javax.persistence.*;
 

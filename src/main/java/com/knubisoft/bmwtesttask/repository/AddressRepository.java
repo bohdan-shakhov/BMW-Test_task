@@ -1,7 +1,7 @@
 package com.knubisoft.bmwtesttask.repository;
 
 
-import com.knubisoft.bmwtesttask.dto.Address;
+import com.knubisoft.bmwtesttask.db_model.Address;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
