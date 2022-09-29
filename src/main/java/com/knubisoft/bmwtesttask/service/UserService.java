@@ -68,5 +68,10 @@ public class UserService {
             // TODO add custom exception
             throw new RuntimeException("The received response does not contain a body");
         }
+
+        if (response.getBody().length != 10) {
+            // TODO add custom exception
+            throw new RuntimeException("Response must contains exactly 10 users!!!");
+        }
     }
 }
