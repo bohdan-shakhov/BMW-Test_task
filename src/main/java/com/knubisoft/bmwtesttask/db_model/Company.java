@@ -22,5 +22,5 @@ public class Company {
     private String name;
 
     @OneToMany(mappedBy = "company")
-    private List<UserDTO> users;
+    private List<UserModel> users;
 }
