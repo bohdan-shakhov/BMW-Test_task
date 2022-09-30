@@ -1,5 +1,6 @@
 package com.knubisoft.bmwtesttask.db_model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,6 +29,7 @@ public class UserModel {
 
     private String name;
 
+    @JsonIgnore
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="company_id")
     private Company company;
