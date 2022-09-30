@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
@@ -29,4 +30,14 @@ public class Company {
     @JsonIgnore
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
     private List<UserModel> users;
+
+    @Override
+    public String toString() {
+        return "Company{" +
+                "id=" + id +
+                ", bs='" + bs + '\'' +
+                ", catchPhrase='" + catchPhrase + '\'' +
+                ", name='" + name +
+                '}';
+    }
 }

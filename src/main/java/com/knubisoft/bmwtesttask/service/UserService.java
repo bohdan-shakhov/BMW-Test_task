@@ -10,6 +10,7 @@ import com.knubisoft.bmwtesttask.exception.WrongLengthOfResponseException;
 import com.knubisoft.bmwtesttask.exception.WrongStatusCodeException;
 import com.knubisoft.bmwtesttask.repository.UserModelRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserService {
 
     private static final String URI = "https://jsonplaceholder.typicode.com/users";
@@ -30,11 +32,17 @@ public class UserService {
     private final AddressService addressService;
 
     private <T> ResponseEntity<T> callToRemoteEndpoint(final String uri, final Class<T> responseType) {
-        return new RestTemplate().getForEntity(uri, responseType);
+        ResponseEntity<T> entity = new RestTemplate().getForEntity(uri, responseType);
+        log.debug("Call to external endpoint with URI - {}", uri);
+        log.debug("Status code of external api response - {}", entity.getStatusCode());
+        log.debug("Headers of external api response - {}", entity.getHeaders());
+        log.debug("Body of external api response - {}", entity.getBody());
+        return entity;
     }
 
 
     public void insertDataFromJsonToDatabase() {
+        log.debug("--- Starting insert user from external endpoint to database...");
         ResponseEntity<UserDTO[]> response = callToRemoteEndpoint(URI, UserDTO[].class);
         // TODO add logging here (status code and body)
         validateResponseFromExternalEndpoint(response);

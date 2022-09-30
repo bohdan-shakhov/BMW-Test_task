@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
@@ -37,4 +38,18 @@ public class UserModel {
     private String email;
 
     private String username;
+
+    @Override
+    public String toString() {
+        return "UserModel{" +
+                "id=" + id +
+                ", website='" + website + '\'' +
+                ", address=" + address +
+                ", phone='" + phone + '\'' +
+                ", name='" + name + '\'' +
+                ", company=" + company +
+                ", email='" + email + '\'' +
+                ", username='" + username + '\'' +
+                '}';
+    }
 }

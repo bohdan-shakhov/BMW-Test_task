@@ -26,4 +26,16 @@ public class Address {
     private String city;
 
     private String street;
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", zipcode='" + zipcode + '\'' +
+                ", geo=" + geo +
+                ", suite='" + suite + '\'' +
+                ", city='" + city + '\'' +
+                ", street='" + street + '\'' +
+                '}';
+    }
 }
