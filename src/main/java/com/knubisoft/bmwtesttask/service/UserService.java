@@ -5,6 +5,9 @@ import com.knubisoft.bmwtesttask.db_model.UserModel;
 import com.knubisoft.bmwtesttask.dto.AddressDTO;
 import com.knubisoft.bmwtesttask.dto.CompanyDTO;
 import com.knubisoft.bmwtesttask.dto.UserDTO;
+import com.knubisoft.bmwtesttask.exception.ResponseWithoutBodyException;
+import com.knubisoft.bmwtesttask.exception.WrongLengthOfResponseException;
+import com.knubisoft.bmwtesttask.exception.WrongStatusCodeException;
 import com.knubisoft.bmwtesttask.repository.UserModelRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -52,17 +55,14 @@ public class UserService {
 
     private void validateResponse(final ResponseEntity<UserDTO[]> response) {
         if (!HttpStatus.OK.equals(response.getStatusCode())) {
-            // TODO add custom exception
-            throw new RuntimeException(String.format("unexpected status code -> %s", response.getStatusCode().value()));
+            throw new WrongStatusCodeException(String.format("unexpected status code -> %s", response.getStatusCode().value()));
         }
         if (response.getBody() == null) {
-            // TODO add custom exception
-            throw new RuntimeException("The received response does not contain a body");
+            throw new ResponseWithoutBodyException();
         }
 
         if (response.getBody().length != 10) {
-            // TODO add custom exception
-            throw new RuntimeException("Response must contains exactly 10 users!!!");
+            throw new WrongLengthOfResponseException();
         }
     }
 }
