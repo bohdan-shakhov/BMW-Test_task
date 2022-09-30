@@ -18,6 +18,9 @@ public class UserAPIImpl implements UserAPI {
 
     @Override
     public ResponseEntity<List<UserModel>> getSearchHints() {
-        return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
+        List<UserModel> users = userService.getAllUsers();
+        ResponseEntity<List<UserModel>> responseEntity = new ResponseEntity<>(users, HttpStatus.OK);
+        userService.validateResponseFromInternalEndpoint(responseEntity);
+        return responseEntity;
     }
 }

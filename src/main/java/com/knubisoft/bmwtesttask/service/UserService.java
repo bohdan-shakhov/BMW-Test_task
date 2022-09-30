@@ -37,7 +37,7 @@ public class UserService {
     public void insertDataFromJsonToDatabase() {
         ResponseEntity<UserDTO[]> response = callToRemoteEndpoint(URI, UserDTO[].class);
         // TODO add logging here (status code and body)
-        validateResponse(response);
+        validateResponseFromExternalEndpoint(response);
         UserDTO[] responseBody = response.getBody();
         Arrays.stream(Objects.requireNonNull(responseBody))
                 .forEach(user -> {
@@ -53,7 +53,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    private void validateResponse(final ResponseEntity<UserDTO[]> response) {
+    private void validateResponseFromExternalEndpoint(final ResponseEntity<UserDTO[]> response) {
         if (!HttpStatus.OK.equals(response.getStatusCode())) {
             throw new WrongStatusCodeException(String.format("unexpected status code -> %s", response.getStatusCode().value()));
         }
@@ -62,6 +62,19 @@ public class UserService {
         }
 
         if (response.getBody().length != 10) {
+            throw new WrongLengthOfResponseException();
+        }
+    }
+
+    public void validateResponseFromInternalEndpoint(final ResponseEntity<List<UserModel>> responseEntity) {
+        if (!HttpStatus.OK.equals(responseEntity.getStatusCode())) {
+            throw new WrongStatusCodeException(String.format("unexpected status code -> %s", responseEntity.getStatusCode().value()));
+        }
+        if (responseEntity.getBody() == null) {
+            throw new ResponseWithoutBodyException();
+        }
+
+        if (responseEntity.getBody().size() != 10) {
             throw new WrongLengthOfResponseException();
         }
     }
