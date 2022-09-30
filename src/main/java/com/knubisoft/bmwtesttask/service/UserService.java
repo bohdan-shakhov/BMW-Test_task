@@ -1,8 +1,5 @@
 package com.knubisoft.bmwtesttask.service;
 
-import com.knubisoft.bmwtesttask.converter.AddressConverter;
-import com.knubisoft.bmwtesttask.converter.CompanyConverter;
-import com.knubisoft.bmwtesttask.converter.GeoConverter;
 import com.knubisoft.bmwtesttask.converter.UserConverter;
 import com.knubisoft.bmwtesttask.db_model.UserModel;
 import com.knubisoft.bmwtesttask.dto.AddressDTO;

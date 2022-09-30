@@ -11,7 +11,7 @@ public class UserConverter {
         return UserModel.builder()
                 .email(userDTO.getEmail())
                 .name(userDTO.getName())
-                .phone(userDTO.getName())
+                .phone(userDTO.getPhone())
                 .username(userDTO.getUserName())
                 .website(userDTO.getWebsite())
                 .address(AddressConverter.convertAddressDTOToAddress(addressDTO, GeoConverter.convertGeoDTOToGEO(addressDTO.getGeo())))
